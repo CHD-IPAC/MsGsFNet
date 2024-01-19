@@ -1,2 +1,2 @@
 # MGFNet
-The code will soon be released.
+Multiscale Gated Fusion Fully Convolutional Network for High Spatial-Spectral Resolution Images Classification.
