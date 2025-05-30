@@ -364,7 +364,7 @@ if __name__ == "__main__":
     # valid_ratio = valid_pixels / total_pixels * 100  # 计算有效标注比例（百分比）
     # print(f"有效标注比例：{valid_ratio:.2f}%")  # 88.11%
 
-    percent = 0.25
+    percent = 0.25     # 0.25 means the 25%
 
     patch_size = 32
 
