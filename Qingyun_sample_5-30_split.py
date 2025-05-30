@@ -188,7 +188,7 @@ if __name__ == "__main__":
 
     image1_labels = labels[:, :]
 
-    percent = 0.25
+    percent = 0.25     # 0.25 means the 25%
 
     create_splits(percent,
                   loc=osp.join('Image32_step_patch'),
