@@ -1,0 +1,1 @@
+4, 8, and 16 are obtained by proportionally dividing a 32×32 patch.
