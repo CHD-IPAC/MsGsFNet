@@ -335,7 +335,7 @@ if __name__ == "__main__":
                self.embedding_size = embedding_size
                self.weightcenters = nn.Parameter(torch.normal(0, 1, (num_classes, embedding_size)))
 
-           def forward(self, x, labels):  # x是band weights，labels是targets
+           def forward(self, x, labels):  # x是band weights
                if len(x.size()) == 1:
                    x = x.unsqueeze(0)
                batch_size = x.size(0)
@@ -356,6 +356,37 @@ if __name__ == "__main__":
                final_sum_per_sample = selected_values.sum(dim=1)
                loss = final_sum_per_sample.clamp(1e-12, 1e+12).sum() / batch_size
                return loss
+
+       # if you use patch_based
+       # class CategoryConsistencyLoss(nn.Module):
+       #     def __init__(self, num_classes, embedding_size):
+       #         super(CategoryConsistencyLoss, self).__init__()
+       #         self.num_classes = num_classes
+       #         self.embedding_size = embedding_size
+       #         self.weightcenters = nn.Parameter(torch.normal(0, 1, (num_classes, embedding_size)))
+
+       #     def forward(self, x, labels):  # x是band weights
+       #         if len(x.size()) == 1:
+       #             x = x.unsqueeze(0)
+       #         batch_size = x.size(0)
+       #         ####################################################
+       #         x_norm = torch.norm(x, p=2, dim=1, keepdim=True)
+       #         weightcenters_norm = torch.norm(self.weightcenters, p=2, dim=1,
+       #                                         keepdim=True)
+       #         x_norm_expand = x_norm.squeeze(dim=1).squeeze(dim=1).expand(batch_size, self.num_classes).t()
+       #         weightcenters_norm_expand = weightcenters_norm.expand(self.num_classes, batch_size).t()
+       #         x = x.view(batch_size, -1)
+       #         # 计算x和weightcenters之间的点积
+       #         cosine_similarity = torch.mm(x, self.weightcenters.t()) / (
+       #                 x_norm_expand.t() * weightcenters_norm_expand + 1e-10)  # 避免除以0
+       #         # 计算余弦距离 (1 - 余弦相似度)
+       #         cosine_distance = 1 - cosine_similarity
+       #         dist_metric = cosine_distance
+       #         ####################################################
+       #         dist = dist_metric[range(batch_size), labels]
+       #         # labels中元素值是1到num_classes，但一共有batch_size个这样的元素
+       #         loss = dist.clamp(1e-12, 1e+12).sum() / batch_size
+       #         return loss
 
     trainloss = []
     valloss = []
