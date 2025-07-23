@@ -12,7 +12,9 @@ Citation
 
 **Please kindly cite the papers if this code is useful and helpful for your research.**
 
-Wenqing Zhou, Lin Bai, Danni Xue, Yunqi Zhang, Amanda Gozho and Meng Hui. MsGsFNet: A Multi-Scale Spatial and Global Spectral Information Fusion Network for UAV-H2 imagery classification, IEEE Transactions on Geoscience and Remote Sensing (TGRS), 2025, DOI: 10.1109/TGRS.2025.3590374.
+Wenqing Zhou, Lin Bai, Danni Xue, Yunqi Zhang, Amanda Gozho and Meng Hui. 
+
+MsGsFNet: A Multi-Scale Spatial and Global Spectral Information Fusion Network for UAV-H2 imagery classification, IEEE Transactions on Geoscience and Remote Sensing (TGRS), 2025, DOI: 10.1109/TGRS.2025.3590374.
 
     @ARTICLE{11084863,
     author={Zhou, Wenqing and Bai, Lin and Xue, Danni and Zhang, Yunqi and Gozho, Amanda and Hui, Meng},
@@ -35,7 +37,9 @@ How to use it?
 
 We provide dataset splitting scripts that ensure non-overlapping spatial regions, located in each dataset folder with filenames such as sample_5-30_split.py.
 
-These scripts offer flexible control over how datasets are divided — including options for patch size, training ratio, and more. We designed the splitting process to be performed separately from the training phase, so that different models can be trained on a consistent dataset split for fair comparison.
+These scripts offer flexible control over how datasets are divided — including options for patch size, training ratio, and more. 
+
+We designed the splitting process to be performed separately from the training phase, so that different models can be trained on a consistent dataset split for fair comparison.
 
 If you prefer to directly use our pre-divided datasets, please follow the instructions below.
 
@@ -53,8 +57,7 @@ After downloading, please replace the corresponding empty dataset folders in thi
 
 The split datasets/WHU-Hi-HongHu/Image32_step_patch/HSI-rad
 
-→
-oold/WHU-Hi-HongHu/Image32_step_patch/HSI-rad
+→ oold/WHU-Hi-HongHu/Image32_step_patch/HSI-rad
 
 Similarly, replace the corresponding folders under Labels/ as needed.
 
@@ -78,6 +81,18 @@ Here, 25 indicates that the minimum training ratio is 25%.
 
 The entire codebase is organized under the oold directory, which contains the original implementation of MsGsFNet.
 
+Our network (MsGsFNet) does not alter the spatial dimensions of the image during processing; it only changes the number of channels. 
+
+And it is originally designed for a pixels-to-pixels (patch-free) classification approach. However, we have also implemented a framework that supports the patch-based approach — by simply setting patch_based=True during the initialization of MsGsFNet.
+
+The proposed MsGsFNet architecture is implemented under:
+
+./oold/networks/MsGsFNet.py
+
+and its sub-module VRAttention is located in:
+
+./oold/networks/VRAttention.py
+
 🔹 Training
 
 To begin training, open train.py.
@@ -88,21 +103,11 @@ Next, scroll to line 242 and configure the experiment:
 
 Select the dataset you wish to use;
 
+Fix the path to save the model weight in the line 208 (/oold/pretrainedweights/_bestMiou_);
+
 Confirm the model settings.
 
-The proposed MsGsFNet architecture is implemented under:
-
-./oold/networks/
-
-and its sub-module VRAttention is located in:
-
-./oold/networks/VRAttention.py
-
 Before training, please open VRAttention.py and check line 18 to adjust the value of parameter R according to the dataset being used. As discussed in our paper, R may need to be tuned if you wish to evaluate MsGsFNet as a baseline on other datasets.
-
-During training, the best model weights will be automatically saved to:
-
-./oold/pretrainedweights/_bestMiou_
 
 🔹 Testing
 
@@ -138,9 +143,7 @@ copies or substantial portions of the Software.
 Contact Information:
 --------------------
 
-Wenqing Zhou (周文清)
-
-Graduate student, School of Automation,
+Wenqing Zhou
 
 Chang'an University, Xi’an, China
 
