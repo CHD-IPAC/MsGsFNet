@@ -83,7 +83,7 @@ The entire codebase is organized under the oold directory, which contains the or
 
 Our network (MsGsFNet) does not alter the spatial dimensions of the image during processing; it only changes the number of channels. 
 
-And it is originally designed for a pixels-to-pixels (patch-free) classification approach. However, we have also implemented a framework that supports the patch-based approach — by simply setting patch_based=True during the initialization of MsGsFNet.
+And it is originally designed for a pixels-to-pixels (patch-free) classification approach. However, we have also implemented a framework that supports the patch-based approach — by simply setting patch_based=True during the initialization of MsGsFNet, and remove the comments from lines 360 to 390 in train.py.
 
 The proposed MsGsFNet architecture is implemented under:
 
