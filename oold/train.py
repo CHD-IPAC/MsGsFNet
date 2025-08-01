@@ -328,6 +328,7 @@ if __name__ == "__main__":
 
     if args.network_arch == 'MsGsFNet':
 
+       # if use pixels-to-pixels
        class CosineDistanceLoss(nn.Module):
            def __init__(self, num_classes, embedding_size):
                super(CosineDistanceLoss, self).__init__()
@@ -358,13 +359,13 @@ if __name__ == "__main__":
                return loss
 
        # if you use patch_based
-       # class CategoryConsistencyLoss(nn.Module):
+       # class CosineDistanceLoss(nn.Module):
        #     def __init__(self, num_classes, embedding_size):
-       #         super(CategoryConsistencyLoss, self).__init__()
+       #         super(CosineDistanceLoss, self).__init__()
        #         self.num_classes = num_classes
        #         self.embedding_size = embedding_size
        #         self.weightcenters = nn.Parameter(torch.normal(0, 1, (num_classes, embedding_size)))
-
+       #
        #     def forward(self, x, labels):  # x是band weights
        #         if len(x.size()) == 1:
        #             x = x.unsqueeze(0)
